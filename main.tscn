@@ -1,3 +1,36 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player.cs" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 528, 60.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="Curve" id=5]
+max_value = 0.01
+
+[sub_resource type="CurveTexture" id=6]
+width = 51
+curve = SubResource( 5 )
 
 [node name="Node" type="Node"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 518, 551 )
+shape = SubResource( 4 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 523, 286 )
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 3 )
+
+[node name="Velocity" type="Sprite" parent="KinematicBody2D"]
+rotation = 1.5708
+texture = SubResource( 6 )
+centered = false
