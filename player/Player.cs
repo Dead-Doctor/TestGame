@@ -3,14 +3,17 @@
 using Godot;
 using System;
 
-public class player : KinematicBody2D
+public class Player : KinematicBody2D
 {
     #region Constants
     // Gravity Strength
-    private readonly Vector2 _gravity = Vector2.Down * 1000f;
+    private readonly Vector2 _gravity = Vector2.Down * 800f;
 
+    // Jump Strength
+    private readonly Vector2 _jumpStrength = Vector2.Up * 200f;
     // Max Jumps (Double Jumps)
     private const int JumpCount = 2;
+    
     #endregion
 
     private Vector2 _velocity;
@@ -53,9 +56,10 @@ public class player : KinematicBody2D
             //////// Jump Version 1 (Spamming spacebar is less efficient)
             // Increase Vertical Velocity up to 500 Units (capped)
             #if JUMP_VERSION_1
-                if (_velocity.y > -500f)
+                // '>' because going up is decreasing y
+                if (_velocity.y > _jumpStrength.y)
                 {
-                    _velocity.y = -500f;
+                    _velocity.y = _jumpStrength.y;
                 }
             #endif
             //////// Jump Version 2 (Spamming spacebar is more efficient)
@@ -73,7 +77,7 @@ public class player : KinematicBody2D
     {
         var velocityDisplay = GetNode<Sprite>("playerVelocityDisplay");
         ((CurveTexture) velocityDisplay.Texture).Width =
-            (int) Mathf.Clamp(_velocity.Length() / 5000f * 1024f + 32f, 32f, 4096f);
+            (int) Mathf.Clamp(_velocity.Length() / 500f * 2048f + 32f, 32f, 4096f);
         velocityDisplay.Rotation = _velocity.Angle();
     }
 
