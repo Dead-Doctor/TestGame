@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/tiles/background.tres" type="TileSet" id=1]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Camera.cs" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 512, 50 )
@@ -25,5 +26,7 @@ shape = SubResource( 4 )
 position = Vector2( -6, -57 )
 
 [node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 0, -40 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
+script = ExtResource( 3 )

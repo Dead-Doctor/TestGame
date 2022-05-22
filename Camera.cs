@@ -1,10 +1,13 @@
 using Godot;
-using System;
 
 public class Camera : Camera2D
 {
-    public override void _Ready()
+    public override void _Process(float delta)
     {
-        GD.Print("Works!");
+        base._Process(delta);
+        if (Input.IsActionJustPressed("window_togglefullscreen"))
+        {
+            OS.WindowFullscreen = !OS.WindowFullscreen;
+        }
     }
 }

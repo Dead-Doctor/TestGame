@@ -19,7 +19,6 @@ public class Player : KinematicBody2D
     private Vector2 _velocity;
     
     // Jumping
-    private bool _wasJumpingLastFrame;
     private int _jumpsLeft = JumpCount;
 
     // Dashing
@@ -46,31 +45,29 @@ public class Player : KinematicBody2D
 
     private void ProcessJumping()
     {
-        var isJumping = Input.IsActionPressed("move_jump");
-        // Jump if player has jumps and he started pressing jump this frame
-        if (_jumpsLeft > 0 && !_wasJumpingLastFrame && isJumping)
-        {
-            _jumpsLeft--;
-            
-            //////// Two Jump Implementations (JUMP_VERSION_1 / JUMP_VERSION_2) [see line 1]
-            //////// Jump Version 1 (Spamming spacebar is less efficient)
-            // Increase Vertical Velocity up to 500 Units (capped)
-            #if JUMP_VERSION_1
-                // '>' because going up is decreasing y
-                if (_velocity.y > _jumpStrength.y)
-                {
-                    _velocity.y = _jumpStrength.y;
-                }
-            #endif
-            //////// Jump Version 2 (Spamming spacebar is more efficient)
-            // Increase Vertical Velocity by 500 Units (not capped)
-            #if JUMP_VERSION_2
-                _velocity += Vector2.Up * 500f;
-            #endif
-            ////////
-        }
-
-        _wasJumpingLastFrame = isJumping;
+        // Jump if player has jumps
+        if (_jumpsLeft <= 0) return;
+        
+        if (!Input.IsActionJustPressed("move_jump")) return;
+        
+        _jumpsLeft--;
+        
+        //////// Two Jump Implementations (JUMP_VERSION_1 / JUMP_VERSION_2) [see line 1]
+        //////// Jump Version 1 (Spamming spacebar is less efficient)
+        // Increase Vertical Velocity up to 500 Units (capped)
+        #if JUMP_VERSION_1
+        // '>' because going up is decreasing y
+            if (_velocity.y > _jumpStrength.y)
+            {
+                _velocity.y = _jumpStrength.y;
+            }
+        #endif
+        //////// Jump Version 2 (Spamming spacebar is more efficient)
+        // Increase Vertical Velocity by 500 Units (not capped)
+        #if JUMP_VERSION_2
+            _velocity += Vector2.Up * 500f;
+        #endif
+        ////////
     }
 
     private void UpdateVelocityDisplay()
