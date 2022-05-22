@@ -24,13 +24,11 @@ config/name="Test Game"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 
-<<<<<<< HEAD
 [display]
 
 window/size/height=576
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
-=======
 [importer_defaults]
 
 texture={
@@ -54,7 +52,6 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
->>>>>>> ea214528bd71073aa178b5b87316dba11cb66600
 
 [input]
 
