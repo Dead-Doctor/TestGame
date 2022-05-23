@@ -1,3 +1,7 @@
+# Build files (ignore godot build files)
+.exe
+.package
+
 # Godot-specific ignores
 .import/
 export.cfg
