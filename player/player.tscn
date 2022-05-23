@@ -1,12 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://player/Player.cs" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="CurveTexture" id=3]
-width = 512
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 5 )
+width = 128
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 8
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -16,7 +27,11 @@ shape = SubResource( 1 )
 
 [node name="playerVelocityDisplay" type="Sprite" parent="."]
 rotation = 0.172788
-scale = Vector2( 0.05, 2 )
-texture = SubResource( 3 )
+scale = Vector2( 0.1, 1 )
+texture = SubResource( 2 )
 centered = false
-offset = Vector2( 0, -0.5 )
+
+[node name="playerCollisionDisplay" type="Sprite" parent="."]
+rotation = -2.13279
+texture = SubResource( 4 )
+centered = false
